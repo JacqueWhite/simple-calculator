@@ -1,18 +1,18 @@
-import React from "react"
-import "./style.css"
+import React from "react";
+import "./style.css";
 
 const NumberButtons = () => {
-  const calculatorNumbers = []
+  const calculatorNumbers = [];
   for (let i = 0; i <= 9; i++) {
-    calculatorNumbers.push(i)
+    calculatorNumbers.push(i);
   }
   const Buttons = calculatorNumbers.map(number => (
     <button className="number-button">
       <p className="number-text">{number}</p>
     </button>
-  ))
-  return <div>{Buttons}</div>
-}
+  ));
+  return Buttons;
+};
 
 export default class Calculator extends React.Component {
   render() {
@@ -25,10 +25,17 @@ export default class Calculator extends React.Component {
             className="calculator-input"
           />
         </div>
-        <div>
-          <NumberButtons />
+        <div className="calculator-buttons-container">
+          <div className="calculator-numbers-container">
+            <NumberButtons />
+          </div>
+          <div className="calculator-operators-container">
+            <button className="add-button">
+              <p className="number-text">+</p>
+            </button>
+          </div>
         </div>
       </div>
-    )
+    );
   }
 }
