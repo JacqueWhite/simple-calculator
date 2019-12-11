@@ -24,7 +24,7 @@
 }
 
 .number-button {
-  height: 85px;
+  height: 100%;
   width: 100%;
   padding: 15px;
   border: none;
@@ -53,7 +53,7 @@
 }
 
 .number-text {
-  font-size: 25px;
+  font-size: 40px;
   color: white;
   font-weight: bold;
   padding: 0;
@@ -63,6 +63,7 @@
 .calculator-buttons-container {
   display: flex;
   flex-direction: row;
+  height: inherit;
 }
 
 .calculator-numbers-container {
