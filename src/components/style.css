@@ -21,6 +21,9 @@
   background-color: #86b1a7;
   border: 4px #7f5023 solid;
   border-radius: 8px;
+  font-size: 32px;
+  font-weight: bold;
+  padding: 0 10px;
 }
 
 .number-button {
