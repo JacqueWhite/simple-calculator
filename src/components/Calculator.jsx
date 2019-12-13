@@ -1,12 +1,12 @@
-import React from "react";
-import "./style.css";
+import React from 'react'
+import './style.css'
 
 const NumberButtons = props => {
-  const calculatorNumbers = [];
+  const calculatorNumbers = []
   for (let i = 0; i <= 9; i++) {
-    calculatorNumbers.push(i);
+    calculatorNumbers.push(i)
   }
-  calculatorNumbers.push(".");
+  calculatorNumbers.push('.')
   const Buttons = calculatorNumbers.map((number, index) => (
     <button
       className="number-button"
@@ -16,42 +16,62 @@ const NumberButtons = props => {
     >
       <p className="number-text">{number}</p>
     </button>
-  ));
-  return Buttons;
-};
+  ))
+  return Buttons
+}
 
 export default class Calculator extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       inputValues: [],
-      output: ""
-    };
+      output: ''
+    }
   }
 
   handleChange = event => {
-    this.setState({ inputValues: this.state.inputValues + event.target.value });
-  };
+    console.log('handle change')
+    console.log(event)
+    this.setState({ inputValues: event.target.value })
+  }
+
+  handleAddInput = event => {
+    console.log('handle add input')
+    console.log(event)
+    this.setState({ inputValues: this.state.inputValues + event.target.value })
+  }
 
   handleClick = number => {
-    this.setState({ inputValues: this.state.inputValues + number });
-  };
+    console.log('handle clicik')
+    console.log(number)
+    this.setState({ inputValues: this.state.inputValues + number })
+  }
 
-  handleSubmit = () => {
-    const string = this.state.inputValues;
+  handleSubmit = event => {
+    console.log('handle submit')
+    console.log(event)
+    event.preventDefault()
+    const string = this.state.inputValues
     // remove all characters that do not match 0-9, ".", or "+"
-    const scrubbedString = string.replace("[^0-9+.]+", "");
+    let scrubbedString = string.replace(/[^0-9+.]+/g, '')
+    // scrub last and first characters to be numbers only
+    if (isNaN(scrubbedString.charAt(0))) {
+      scrubbedString = scrubbedString.substring(1)
+    }
+    if (isNaN(scrubbedString.charAt(scrubbedString.length - 1))) {
+      scrubbedString = scrubbedString.substring(0, scrubbedString.length - 1)
+    }
     // eval() runs the string as javascript - in most cases, we do not want to use this for security/code injection purposes, but we are stripping the string first to avoid this
-    const result = eval(scrubbedString);
-    this.setState({ inputValues: "", output: result });
-  };
+    const result = eval(scrubbedString)
+    this.setState({ inputValues: '', output: result })
+  }
 
   clearCalculator = () => {
-    this.setState({ inputValues: "", output: "" });
-  };
+    this.setState({ inputValues: '', output: '' })
+  }
 
   render() {
-    const { inputValues, output } = this.state;
+    const { inputValues, output } = this.state
     return (
       <div className="calculator-container">
         <div className="calculator-header-container">
@@ -72,7 +92,7 @@ export default class Calculator extends React.Component {
             <button
               className="add-button"
               value="+"
-              onClick={this.handleChange}
+              onClick={this.handleAddInput}
             >
               <p className="number-text">+</p>
             </button>
@@ -89,6 +109,6 @@ export default class Calculator extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
