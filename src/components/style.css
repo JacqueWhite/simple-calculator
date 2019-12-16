@@ -1,0 +1,114 @@
+.calculator-container {
+  height: 80%;
+  width: 60%;
+  min-width: 400px;
+  max-width: 680px;
+  background-color: #e39e41;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 30px;
+}
+
+.calculator-header-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+
+.calculator-input {
+  height: 10vh;
+  width: 100%;
+  background-color: #86b1a7;
+  border: 4px #7f5023 solid;
+  border-radius: 8px;
+  font-size: 25px;
+  font-weight: bold;
+  padding: 0 10px;
+}
+
+.number-button {
+  height: 100%;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.19);
+  background-color: #7f5023;
+}
+
+.number-button:hover {
+  background-color: #a16022;
+}
+
+.add-button {
+  height: 60%;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.19);
+  background-color: #edd6b6;
+}
+
+.add-button:hover {
+  background-color: #cfbb9f;
+}
+
+.clear-button {
+  background-color: #d54931;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.19);
+}
+
+.clear-button:hover {
+  background-color: #fa725a;
+}
+
+.submit-button {
+  background-color: #86b1a7;
+  color: grey;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.19);
+}
+
+.submit-button:hover {
+  background-color: #afdbd1;
+}
+
+.number-text {
+  font-size: 40px;
+  color: white;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+}
+
+.calculator-buttons-container {
+  display: flex;
+  flex-direction: row;
+  height: inherit;
+}
+
+.calculator-numbers-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-rows: auto;
+  grid-gap: 5%;
+  width: 75%;
+  margin-top: 30px;
+}
+
+.calculator-operators-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25%;
+  margin: 30px 0px 0px 5%;
+}
