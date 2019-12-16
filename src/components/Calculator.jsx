@@ -75,10 +75,19 @@ export default class Calculator extends React.Component {
     // if (numbersArray.length > 2) {
     //   this.setState({ inputValues: '', output: 'error - max input: 2 numbers' })
     // } else {
-    // else, sum all numbers and set output
-    const sum = numbersArray.reduce((accumulator, a) => accumulator + a, 0)
-    this.setState({ inputValues: '', output: sum })
-    // }
+
+    // STEP 3:  don't allow negative numbers, throw negative numbers provided
+    const negativeNumbers = numbersArray.filter(x => x < 0)
+    if (negativeNumbers.length) {
+      this.setState({
+        inputValues: '',
+        output: `error - no negatives: ${negativeNumbers}`
+      })
+    } else {
+      // else, sum all numbers and set output
+      const sum = numbersArray.reduce((accumulator, a) => accumulator + a, 0)
+      this.setState({ inputValues: '', output: sum })
+    }
   }
 
   clearCalculator = () => {
