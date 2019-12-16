@@ -33,6 +33,7 @@ export default class Calculator extends React.Component {
   }
 
   handleChange = event => {
+    console.log(event)
     this.setState({ inputValues: event.target.value, output: '' })
   }
 
@@ -50,8 +51,8 @@ export default class Calculator extends React.Component {
   handleSubmit = event => {
     event.preventDefault()
     const { inputValues } = this.state
-    // remove all characters that do not match 0-9, ".", "," or "+"
-    let scrubbedString = inputValues.replace(/[^0-9+.,-]+/g, '')
+    // remove all characters that do not match 0-9, ".", ",", "+", or a newline character \n
+    let scrubbedString = inputValues.replace(/[^0-9+.,\-\n]+/g, '')
     // scrub last and first characters to be numbers only (or decimal or negative number), protect against negative first number
     if (
       isNaN(scrubbedString.charAt(0)) &&
@@ -63,8 +64,8 @@ export default class Calculator extends React.Component {
     if (isNaN(scrubbedString.charAt(scrubbedString.length - 1))) {
       scrubbedString = scrubbedString.substring(0, scrubbedString.length - 1)
     }
-    // replace all "+" with "," to ultimately convert to an array (only necessary because user can use "+" button, keyboard "+", or ",")
-    const stringArray = scrubbedString.replace(/[+]+/g, ',')
+    // replace all "+" and newlines with "," to ultimately convert to an array (only necessary because user can use "+" button, keyboard "+", or ",")
+    const stringArray = scrubbedString.replace(/[+\n]+/g, ',')
 
     // convert all to numbers
     const numbersArray = stringArray.split(',').map(Number)
@@ -90,8 +91,7 @@ export default class Calculator extends React.Component {
     return (
       <div className="calculator-container">
         <div className="calculator-header-container">
-          <input
-            type="text"
+          <textarea
             name="calculator-input"
             className="calculator-input"
             value={inputValues || output}
