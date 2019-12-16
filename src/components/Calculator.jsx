@@ -52,8 +52,8 @@ export default class Calculator extends React.Component {
     console.log(event)
     event.preventDefault()
     const string = this.state.inputValues
-    // remove all characters that do not match 0-9, ".", or "+"
-    let scrubbedString = string.replace(/[^0-9+.]+/g, '')
+    // remove all characters that do not match 0-9, ".", "," or "+"
+    let scrubbedString = string.replace(/[^0-9+.,]+/g, '')
     // scrub last and first characters to be numbers only
     if (isNaN(scrubbedString.charAt(0))) {
       scrubbedString = scrubbedString.substring(1)
@@ -61,8 +61,9 @@ export default class Calculator extends React.Component {
     if (isNaN(scrubbedString.charAt(scrubbedString.length - 1))) {
       scrubbedString = scrubbedString.substring(0, scrubbedString.length - 1)
     }
+    let replaceCommas = scrubbedString.replace(/[,]+/g, '+')
     // eval() runs the string as javascript - in most cases, we do not want to use this for security/code injection purposes, but we are stripping the string first to avoid this
-    const result = eval(scrubbedString)
+    const result = eval(replaceCommas)
     this.setState({ inputValues: '', output: result })
   }
 
