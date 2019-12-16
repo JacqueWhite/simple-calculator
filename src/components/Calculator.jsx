@@ -33,7 +33,6 @@ export default class Calculator extends React.Component {
   }
 
   handleChange = event => {
-    console.log(event)
     this.setState({ inputValues: event.target.value, output: '' })
   }
 
