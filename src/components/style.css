@@ -1,6 +1,7 @@
 .calculator-container {
   height: 80%;
   width: 60%;
+  min-width: 400px;
   max-width: 680px;
   background-color: #e39e41;
   border: 2px solid black;
@@ -21,7 +22,7 @@
   background-color: #86b1a7;
   border: 4px #7f5023 solid;
   border-radius: 8px;
-  font-size: 32px;
+  font-size: 25px;
   font-weight: bold;
   padding: 0 10px;
 }
@@ -44,7 +45,6 @@
   height: 60%;
   width: 100%;
   padding: 15px;
-  margin: 15px;
   border: none;
   border-radius: 5px;
   box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.19);
@@ -53,6 +53,33 @@
 
 .add-button:hover {
   background-color: #cfbb9f;
+}
+
+.clear-button {
+  background-color: #d54931;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.19);
+}
+
+.clear-button:hover {
+  background-color: #fa725a;
+}
+
+.submit-button {
+  background-color: #86b1a7;
+  color: grey;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.19);
+}
+
+.submit-button:hover {
+  background-color: #afdbd1;
 }
 
 .number-text {
@@ -81,6 +108,7 @@
 .calculator-operators-container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   width: 25%;
+  margin: 30px 0px 0px 5%;
 }

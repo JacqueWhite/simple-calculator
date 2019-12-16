@@ -3,10 +3,13 @@ import './style.css'
 
 const NumberButtons = props => {
   const calculatorNumbers = []
+  // add buttons for numbers 0 - 9
   for (let i = 0; i <= 9; i++) {
     calculatorNumbers.push(i)
   }
+  // add button for decimal
   calculatorNumbers.push('.')
+  // create buttons ui
   const Buttons = calculatorNumbers.map((number, index) => (
     <button
       className="number-button"
@@ -30,41 +33,51 @@ export default class Calculator extends React.Component {
   }
 
   handleChange = event => {
-    console.log('handle change')
-    console.log(event)
-    this.setState({ inputValues: event.target.value })
+    this.setState({ inputValues: event.target.value, output: '' })
   }
 
   handleAddInput = event => {
-    console.log('handle add input')
-    console.log(event)
-    this.setState({ inputValues: this.state.inputValues + event.target.value })
+    this.setState({
+      inputValues: this.state.inputValues + event.target.value,
+      output: ''
+    })
   }
 
   handleClick = number => {
-    console.log('handle clicik')
-    console.log(number)
-    this.setState({ inputValues: this.state.inputValues + number })
+    this.setState({ inputValues: this.state.inputValues + number, output: '' })
   }
 
   handleSubmit = event => {
-    console.log('handle submit')
-    console.log(event)
     event.preventDefault()
-    const string = this.state.inputValues
+    const { inputValues } = this.state
     // remove all characters that do not match 0-9, ".", "," or "+"
-    let scrubbedString = string.replace(/[^0-9+.,]+/g, '')
-    // scrub last and first characters to be numbers only
-    if (isNaN(scrubbedString.charAt(0))) {
+    let scrubbedString = inputValues.replace(/[^0-9+.,-]+/g, '')
+    // scrub last and first characters to be numbers only (or decimal or negative number), protect against negative first number
+    if (
+      isNaN(scrubbedString.charAt(0)) &&
+      scrubbedString.charAt(0) !== '-' &&
+      scrubbedString.charAt(0) !== '.'
+    ) {
       scrubbedString = scrubbedString.substring(1)
     }
     if (isNaN(scrubbedString.charAt(scrubbedString.length - 1))) {
       scrubbedString = scrubbedString.substring(0, scrubbedString.length - 1)
     }
-    let replaceCommas = scrubbedString.replace(/[,]+/g, '+')
-    // eval() runs the string as javascript - in most cases, we do not want to use this for security/code injection purposes, but we are stripping the string first to avoid this
-    const result = eval(replaceCommas)
-    this.setState({ inputValues: '', output: result })
+    // replace all "+" with "," to ultimately convert to an array (only necessary because user can use "+" button, keyboard "+", or ",")
+    const stringArray = scrubbedString.replace(/[+]+/g, ',')
+
+    // convert all to numbers
+    const numbersArray = stringArray.split(',').map(Number)
+    console.log(numbersArray)
+
+    // throw exception if arguments is greater than 2
+    if (numbersArray.length > 2) {
+      this.setState({ inputValues: '', output: 'error - max input: 2 numbers' })
+    } else {
+      // else, sum all numbers and set output
+      const sum = numbersArray.reduce((accumulator, a) => accumulator + a, 0)
+      this.setState({ inputValues: '', output: sum })
+    }
   }
 
   clearCalculator = () => {
@@ -80,7 +93,6 @@ export default class Calculator extends React.Component {
             type="text"
             name="calculator-input"
             className="calculator-input"
-            placeholder="use keyboard or buttons"
             value={inputValues || output}
             onChange={this.handleChange}
           />

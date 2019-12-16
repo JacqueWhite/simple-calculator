@@ -7,3 +7,16 @@
   align-items: center;
   background-color: #e6cfab;
 }
+
+.home-header-container {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.home-header-text {
+  margin: 0 0 10px 0;
+}
+
+.home-header-subtext {
+  margin: 0;
+}
