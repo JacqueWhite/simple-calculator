@@ -61,7 +61,6 @@ export default class Calculator extends React.Component {
     const hasUserDefinedDelimeter = delimeterRegex.test(inputValues)
     // regex for containing any strings with "[content]"
     const delimeterInBrackets = RegExp(/\[(.*?)\]/, 'g')
-    // const delimArray = delimeterContent[0].match(delimeterInBrackets)
     // test the user defined delimeters for "[content]"
     const hasMultipleDelimeters = delimeterInBrackets.test(delimeterContent)
 
@@ -70,15 +69,15 @@ export default class Calculator extends React.Component {
     // if the user defined a delimeter, replace all delimeters with "+"
     if (hasUserDefinedDelimeter && !hasMultipleDelimeters) {
       const newDelim = inputValues.match(/(?<=\/\/).*(?=\n)/g)
-      var allDelims = RegExp(newDelim, 'g')
+      const allDelims = RegExp(newDelim, 'g')
       scrubbedString = stringToCalculate.replace(allDelims, '+')
 
       // STEP 8 - allow for multiple user defined delimeters
     } else if (hasUserDefinedDelimeter && hasMultipleDelimeters) {
+      // get array of all user defined delimeters
       const delimArray = delimeterContent[0].match(delimeterInBrackets)
-      // for each delim, get the content of it and replace all items with "+"
-      var i
-      for (i = 0; i < delimArray.length; i++) {
+      // for each delim, replace each with "+"
+      for (let i = 0; i < delimArray.length; i++) {
         const tempDelim = delimArray[i].substring(1, delimArray[i].length - 1)
         stringToCalculate = stringToCalculate.split(tempDelim)
         stringToCalculate = stringToCalculate.join('+')
