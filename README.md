@@ -1,6 +1,6 @@
 # Simple Addition Calculator
 
-![Calculator Img](https://jacqueportfolio.s3.us-east-2.amazonaws.com/calculator.png)
+<img src="https://jacqueportfolio.s3.us-east-2.amazonaws.com/calculator.png" width="400">
 
 ### Features:
 
