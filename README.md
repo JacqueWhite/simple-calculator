@@ -18,3 +18,6 @@ To run the Calculator:
 `npm run start`
 
 localhost 3000 should automatically open if it's not in use
+
+### Steps to Build:
+- View history of PRs for each step taken to build the calculator
