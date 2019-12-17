@@ -50,8 +50,25 @@ export default class Calculator extends React.Component {
   handleSubmit = event => {
     event.preventDefault()
     const { inputValues } = this.state
-    // remove all characters that do not match 0-9, ".", ",", "+", or a newline character \n
-    let scrubbedString = inputValues.replace(/[^0-9+.,\-\n]+/g, '')
+
+    // STEP 6 & STEP 7
+    // find any characters inbetween "//" and a newline, define that as a delimeter
+    const delimeterRegex = RegExp(/(?<=\/\/).*(?=\n)/, 'g')
+    const userDefinedDelimeter = delimeterRegex.test(inputValues)
+
+    let scrubbedString = ''
+    // if the user defined a delimeter, replace all delimeters with "+"
+    if (userDefinedDelimeter) {
+      const newDelim = inputValues.match(/(?<=\/\/).*(?=\n)/g)
+      var allDelims = new RegExp(newDelim, 'g')
+      const delimsReplaced = inputValues.replace(allDelims, '+')
+      // remove all characters that do not match 0-9, ".", ",", "+", or a newline character \n
+      scrubbedString = delimsReplaced.replace(/[^0-9+.,\-\n]+/g, '')
+    } else {
+      // remove all characters that do not match 0-9, ".", ",", "+", or a newline character \n
+      scrubbedString = inputValues.replace(/[^0-9+.,\-\n]+/g, '')
+    }
+
     // scrub last and first characters to be numbers only (or decimal or negative number), protect against negative first number
     if (
       isNaN(scrubbedString.charAt(0)) &&
