@@ -78,6 +78,7 @@ export default class Calculator extends React.Component {
 
     // STEP 3:  don't allow negative numbers, throw negative numbers provided
     const negativeNumbers = numbersArray.filter(x => x < 0)
+
     if (negativeNumbers.length) {
       this.setState({
         inputValues: '',
@@ -85,7 +86,9 @@ export default class Calculator extends React.Component {
       })
     } else {
       // else, sum all numbers and set output
-      const sum = numbersArray.reduce((accumulator, a) => accumulator + a, 0)
+      // STEP 5: ignore all numbers greater than 1000 and return sum
+      const underThousand = numbersArray.filter(x => x <= 1000)
+      const sum = underThousand.reduce((accumulator, a) => accumulator + a, 0)
       this.setState({ inputValues: '', output: sum })
     }
   }
