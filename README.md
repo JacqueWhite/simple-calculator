@@ -20,4 +20,4 @@ To run the Calculator:
 localhost 3000 should automatically open if it's not in use
 
 ### Steps to Build:
-- View history of PRs for each step taken to build the calculator
+- View history of PRs for each step taken to build the calculator: https://github.com/JacqueWhite/simple-calculator/pulls?utf8=%E2%9C%93&q=
