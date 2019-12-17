@@ -52,23 +52,41 @@ export default class Calculator extends React.Component {
     const { inputValues } = this.state
 
     // STEP 6 & STEP 7
-    // find any characters inbetween "//" and a newline, define that as a delimeter
+
+    // regex for inbetween "//" and a newline, define that as a delimeter
     const delimeterRegex = RegExp(/(?<=\/\/).*(?=\n)/, 'g')
-    const userDefinedDelimeter = delimeterRegex.test(inputValues)
+    // return content between "//" and newline
+    const delimeterContent = inputValues.match(delimeterRegex)
+    // return true/false of delimeter regex in inputValues
+    const hasUserDefinedDelimeter = delimeterRegex.test(inputValues)
+    // regex for containing any strings with "[content]"
+    const delimeterInBrackets = RegExp(/\[(.*?)\]/, 'g')
+    // test the user defined delimeters for "[content]"
+    const hasMultipleDelimeters = delimeterInBrackets.test(delimeterContent)
 
     let scrubbedString = ''
+    let stringToCalculate = inputValues.split('\n')[1]
     // if the user defined a delimeter, replace all delimeters with "+"
-    if (userDefinedDelimeter) {
+    if (hasUserDefinedDelimeter && !hasMultipleDelimeters) {
       const newDelim = inputValues.match(/(?<=\/\/).*(?=\n)/g)
-      var allDelims = new RegExp(newDelim, 'g')
-      const delimsReplaced = inputValues.replace(allDelims, '+')
-      // remove all characters that do not match 0-9, ".", ",", "+", or a newline character \n
-      scrubbedString = delimsReplaced.replace(/[^0-9+.,\-\n]+/g, '')
+      const allDelims = RegExp(newDelim, 'g')
+      scrubbedString = stringToCalculate.replace(allDelims, '+')
+
+      // STEP 8 - allow for multiple user defined delimeters
+    } else if (hasUserDefinedDelimeter && hasMultipleDelimeters) {
+      // get array of all user defined delimeters
+      const delimArray = delimeterContent[0].match(delimeterInBrackets)
+      // for each delim, replace each with "+"
+      for (let i = 0; i < delimArray.length; i++) {
+        const tempDelim = delimArray[i].substring(1, delimArray[i].length - 1)
+        stringToCalculate = stringToCalculate.split(tempDelim)
+        stringToCalculate = stringToCalculate.join('+')
+      }
+      scrubbedString = stringToCalculate
     } else {
       // remove all characters that do not match 0-9, ".", ",", "+", or a newline character \n
       scrubbedString = inputValues.replace(/[^0-9+.,\-\n]+/g, '')
     }
-
     // scrub last and first characters to be numbers only (or decimal or negative number), protect against negative first number
     if (
       isNaN(scrubbedString.charAt(0)) &&

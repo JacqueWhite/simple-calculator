@@ -2,7 +2,9 @@
   height: 80%;
   width: 60%;
   min-width: 400px;
-  max-width: 680px;
+  max-width: 475px;
+  min-height: 520px;
+  max-height: 900px;
   background-color: #e39e41;
   border: 2px solid black;
   border-radius: 5px;
@@ -49,6 +51,7 @@
   border-radius: 5px;
   box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.19);
   background-color: #edd6b6;
+  margin-bottom: 10px;
 }
 
 .add-button:hover {
@@ -62,6 +65,7 @@
   border: none;
   border-radius: 5px;
   box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.19);
+  margin-bottom: 10px;
 }
 
 .clear-button:hover {
@@ -76,6 +80,7 @@
   border: none;
   border-radius: 5px;
   box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.19);
+  margin-bottom: 10px;
 }
 
 .submit-button:hover {
